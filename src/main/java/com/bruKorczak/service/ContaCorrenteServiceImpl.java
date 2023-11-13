@@ -18,6 +18,37 @@ public class ContaCorrenteServiceImpl implements ContaCorrenteService {
     }
 
     @Override
+    public ContaCorrente criarConta(String nome, String cpf) throws ContaInvalidaException {
+        if (cpfExistente(cpf)) {
+            throw new ContaInvalidaException("CPF já está em uso. Por favor, escolha outro CPF.");
+        }
+        if (nome == null || nome.isEmpty() || cpf == null || cpf.isEmpty()) {
+            throw new ContaInvalidaException("Nome e CPF são obrigatórios");
+        }
+        String numConta = gerarNumContaUnico();
+        Cliente cliente = new Cliente(nome, cpf);
+
+        ContaCorrente contaNova = new ContaCorrente(numConta, 0.0, cliente);
+        contasCorrentes.add(contaNova);
+
+        return contaNova;
+    }
+
+    @Override
+    public boolean cpfExistente(String cpf) {
+        return contasCorrentes.stream().anyMatch(conta -> conta.getTitular().getCpf().equals(cpf));
+    }
+
+    private String gerarNumContaUnico() {
+        return String.format("%05d", contadorContas.getAndIncrement());
+    }
+
+    @Override
+    public List<ContaCorrente> listarContas() {
+        return contasCorrentes;
+    }
+
+    @Override
     public ContaCorrente getContaPorNumero(String numConta) {
         return contasCorrentes.stream()
                 .filter(conta -> conta.getNumConta().equals(numConta))
@@ -59,28 +90,5 @@ public class ContaCorrenteServiceImpl implements ContaCorrenteService {
             throw new SaldoInsuficienteException("Saldo insuficiente para realizar a transferência.");
         }
         origem.transferir(origem, destino, valor);
-    }
-
-    @Override
-    public ContaCorrente criarConta(String nome, String cpf) throws ContaInvalidaException {
-        if (nome == null || nome.isEmpty() || cpf == null || cpf.isEmpty()) {
-            throw new ContaInvalidaException("Nome e CPF são obrigatórios");
-        }
-        String numConta = gerarNumContaUnico();
-        Cliente cliente = new Cliente(nome, cpf);
-
-        ContaCorrente contaNova = new ContaCorrente(numConta, 0.0, cliente);
-        contasCorrentes.add(contaNova);
-
-        return contaNova;
-    }
-
-    private String gerarNumContaUnico() {
-        return String.format("%05d", contadorContas.getAndIncrement());
-    }
-
-    @Override
-    public List<ContaCorrente> listarContas() {
-        return contasCorrentes;
     }
 }
