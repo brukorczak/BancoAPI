@@ -25,20 +25,24 @@ Depois de iniciar o servidor, você pode acessar os seguintes Endpoint:
 
 - Criar Conta:
 
-[http://localhost:8080/contacorrente](http://localhost:8080/contacorrente): POST.
+[localhost:8080/contacorrente](localhost:8080/contacorrente): POST.
+
+- Contas
+
+[localhost:8080/contacorrente/contas](localhost:8080/contacorrente/contas): GET.
 
 - Ver Saldo:
 
-[http://localhost:8080/contacorrente/saldo/{numConta}](http://localhost:8080/contacorrente/saldo/{numConta}): GET.
+[localhost:8080/contacorrente/saldo/{numConta}](localhost:8080/contacorrente/saldo/{numConta}): GET.
 
 - Depositar:
 
-[http://localhost:8080/contacorrente/depositar](http://localhost:8080/contacorrente/depositar): POST.
+[localhost:8080/contacorrente/depositar](localhost:8080/contacorrente/depositar): POST.
 
 - Sacar:
 
-[http://localhost:8080/contacorrente/sacar](http://localhost:8080/contacorrente/sacar): POST.
+[localhost:8080/contacorrente/sacar](localhost:8080/contacorrente/sacar): POST.
 
 - Transferir:
 
-[http://localhost:8080/contacorrente/transferir](http://localhost:8080/contacorrente/transferir): PATCH.
+[localhost:8080/contacorrente/transferir](localhost:8080/contacorrente/transferir): PATCH.
