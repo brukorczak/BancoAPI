@@ -2,10 +2,8 @@ package acme;
 
 import com.bruKorczak.globalExceptionalHandler.ContaInvalidaException;
 import com.bruKorczak.globalExceptionalHandler.SaldoInsuficienteException;
-import com.bruKorczak.model.Cliente;
-import com.bruKorczak.model.ContaBancaria;
 import com.bruKorczak.model.ContaCorrente;
-import com.bruKorczak.service.ContaCorrenteService;
+import com.bruKorczak.service.IContaCorrenteService;
 import com.bruKorczak.service.ContaCorrenteServiceImpl;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -19,7 +17,7 @@ import java.util.List;
 public class GreetingResource {
 
     List<ContaCorrente> contaCorrentes = new ArrayList<>();
-    ContaCorrenteService contaService = new ContaCorrenteServiceImpl(contaCorrentes);
+    IContaCorrenteService contaService = new ContaCorrenteServiceImpl(contaCorrentes);
 
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

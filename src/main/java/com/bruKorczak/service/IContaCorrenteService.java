@@ -6,7 +6,7 @@ import com.bruKorczak.model.ContaCorrente;
 
 import java.util.List;
 
-public interface ContaCorrenteService {
+public interface IContaCorrenteService {
 
     ContaCorrente getContaPorNumero(String numConta);
 

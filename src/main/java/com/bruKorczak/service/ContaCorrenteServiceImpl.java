@@ -9,7 +9,7 @@ import com.bruKorczak.model.ContaCorrente;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ContaCorrenteServiceImpl implements ContaCorrenteService {
+public class ContaCorrenteServiceImpl implements IContaCorrenteService {
     private final List<ContaCorrente> contasCorrentes;
     private static final AtomicInteger contadorContas = new AtomicInteger(1);
 
