@@ -46,3 +46,7 @@ Depois de iniciar o servidor, você pode acessar os seguintes Endpoint:
 - Transferir:
 
 [localhost:8080/contacorrente/transferir](localhost:8080/contacorrente/transferir): **PATCH**.
+
+- Deletar:
+
+[localhost:8080/contacorrente/excluir/{numConta}](localhost:8080/contacorrente/depositar/excluir/{numConta}): **DELETE**.
