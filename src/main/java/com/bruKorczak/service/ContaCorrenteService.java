@@ -12,6 +12,8 @@ public interface ContaCorrenteService {
 
     boolean cpfExistente(String cpf);
 
+    boolean excluirConta(String numConta);
+
     List<ContaCorrente> listarContas();
 
     ContaCorrente criarConta(String nome, String cpf) throws ContaInvalidaException;

@@ -91,4 +91,15 @@ public class ContaCorrenteServiceImpl implements ContaCorrenteService {
         }
         origem.transferir(origem, destino, valor);
     }
+
+    @Override
+    public boolean excluirConta(String numConta) {
+        ContaCorrente conta = getContaPorNumero(numConta);
+
+        if (conta != null) {
+            return contasCorrentes.remove(conta);
+        } else {
+            return false;
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.bruKorczak.model;
 
 import com.bruKorczak.globalExceptionalHandler.SaldoInsuficienteException;
 import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.core.Response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

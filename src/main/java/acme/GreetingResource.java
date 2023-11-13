@@ -2,11 +2,15 @@ package acme;
 
 import com.bruKorczak.globalExceptionalHandler.ContaInvalidaException;
 import com.bruKorczak.globalExceptionalHandler.SaldoInsuficienteException;
+import com.bruKorczak.model.Cliente;
+import com.bruKorczak.model.ContaBancaria;
 import com.bruKorczak.model.ContaCorrente;
 import com.bruKorczak.service.ContaCorrenteService;
 import com.bruKorczak.service.ContaCorrenteServiceImpl;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,4 +126,23 @@ public class GreetingResource {
             return "Ocorreu um erro inesperado na transação de transferência.";
         }
     }
+
+    @DELETE
+    @Path("/excluir/{numConta}")
+    @Transactional
+    public Response excluirConta(@PathParam("numConta") String numConta) {
+        try {
+            boolean contaExcluida = contaService.excluirConta(numConta);
+
+            if (contaExcluida) {
+                return Response.ok("Conta excluída com sucesso.").build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).entity("Conta não encontrada para o número: " + numConta).build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao excluir a conta.").build();
+        }
+    }
+
 }
