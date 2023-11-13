@@ -1,56 +1,44 @@
-# code-with-quarkus
+# Banco - Quarkus
 
-Este projeto utiliza o Quarkus, o Framework Java Supersônico Subatômico.
+Este é um projeto que gerencia contas correntes usando o framework Quarkus. Abaixo estão as instruções sobre como executar o projeto e as rotas disponíveis.
 
 Se você deseja aprender mais sobre o Quarkus, visite o site oficial: https://quarkus.io/ .
 
 ## Executando a aplicação em modo de desenvolvimento
-
 Você pode executar sua aplicação em modo de desenvolvimento, que permite codificação ao vivo, utilizando:
 ```shell script
 ./mvnw compile quarkus:dev
 ```
+ou 
+```shell script
+quarkus dev
+```
+
 
 > **_NOTA:_**  O Quarkus agora inclui uma interface de usuário de desenvolvimento (Dev UI), disponível apenas no modo de desenvolvimento em http://localhost:8080/q/dev/.
 
-## Empacotando e executando a aplicação
+## Endpoints
 
-A aplicação pode ser empacotada utilizando:
-```shell script
-./mvnw package
-```
-Isso produz o arquivo quarkus-run.jar no diretório target/quarkus-app/.
-Este não é um über-jar, pois as dependências são copiadas para o diretório target/quarkus-app/lib/.
+Endpoint principal: /contacorrente
 
-A aplicação pode ser executada usando java -jar target/quarkus-app/quarkus-run.jar.
+Depois de iniciar o servidor, você pode acessar os seguintes Endpoint:
 
-Se você deseja construir um über-jar, execute o seguinte comando:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
-```
+- Criar Conta:
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+[http://localhost:8080/contacorrente](http://localhost:8080/contacorrente): POST.
 
-## Criando um executável nativo
+- Ver Saldo:
 
-Você pode criar um executável nativo usando:
-```shell script
-./mvnw package -Dnative
-```
+[http://localhost:8080/contacorrente/saldo/{numConta}](http://localhost:8080/contacorrente/saldo/{numConta}): GET.
 
-Ou, se você não tiver o GraalVM instalado, pode executar a compilação do executável nativo em um contêiner usando:
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
+- Depositar:
 
-Em seguida, você pode executar seu executável nativo com:  `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
+[http://localhost:8080/contacorrente/depositar](http://localhost:8080/contacorrente/depositar): POST.
 
-Se desejar aprender mais sobre a criação de executáveis nativos, consulte  https://quarkus.io/guides/maven-tooling.
+- Sacar:
 
-## Código Fornecido
+[http://localhost:8080/contacorrente/sacar](http://localhost:8080/contacorrente/sacar): POST.
 
-### RESTEasy Reactive
+- Transferir:
 
-Inicie facilmente seus Serviços Web Reativos RESTful.
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+[http://localhost:8080/contacorrente/transferir](http://localhost:8080/contacorrente/transferir): PATCH.
