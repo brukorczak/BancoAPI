@@ -43,11 +43,4 @@ public class ContaBancaria {
             System.out.println(e.getMessage());
         }
     }
-
-    @Override
-    public String toString() {
-        return "Numero da Conta: " + numConta +
-                "\nSaldo:" + saldo +
-                "\nTitular:" + titular;
-    }
 }

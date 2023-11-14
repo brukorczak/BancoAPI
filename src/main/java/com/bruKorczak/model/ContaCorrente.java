@@ -1,9 +1,11 @@
 package com.bruKorczak.model;
 
 import com.bruKorczak.globalExceptionalHandler.SaldoInsuficienteException;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ContaCorrente extends ContaBancaria {
@@ -19,13 +21,5 @@ public class ContaCorrente extends ContaBancaria {
     public void sacar(double valor) throws SaldoInsuficienteException {
         double taxa = valor * taxaManutencao;
         super.sacar(valor + taxa);
-    }
-
-    @Override
-    public String toString() {
-        return "\nConta Corrente: " +
-                "\n Numero da Conta: " + getNumConta() +
-                "\n Saldo: " + getSaldo() +
-                "\n Titular: " + getTitular();
     }
 }

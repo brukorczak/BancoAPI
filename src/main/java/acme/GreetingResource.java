@@ -22,11 +22,11 @@ public class GreetingResource {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
-    public String criarConta(@FormParam("nome") String nome, @FormParam("cpf") String cpf) {
+    public Response criarConta(@FormParam("nome") String nome, @FormParam("cpf") String cpf) {
         try {
             ContaCorrente contaCorrente = contaService.criarConta(nome, cpf);
 
-            return String.format(
+            String mensagem = String.format(
                     "\nConta criada com sucesso:" +
                             "\nConta Corrente: %s" +
                             "\nSaldo: %s" +
@@ -37,11 +37,13 @@ public class GreetingResource {
                     contaCorrente.getSaldo(),
                     nome,
                     cpf);
+
+            return Response.status(Response.Status.CREATED).entity(mensagem).build();
         } catch (ContaInvalidaException e) {
-            return "Erro ao criar conta: " + e.getMessage();
+            return Response.status(Response.Status.BAD_REQUEST).entity("Erro ao criar conta: " + e.getMessage()).build();
         } catch (Exception e) {
             e.printStackTrace();
-            return "Ocorreu um erro inesperado ao criar a conta.";
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Ocorreu um erro inesperado ao criar a conta.").build();
         }
     }
 
@@ -61,12 +63,13 @@ public class GreetingResource {
     @GET
     @Path("/saldo/{numConta}")
     @Produces(MediaType.TEXT_PLAIN)
-    public String verSaldo(@PathParam("numConta") String numConta) {
+    public Response verSaldo(@PathParam("numConta") String numConta) {
         ContaCorrente conta = contaService.getContaPorNumero(numConta);
         if (conta != null) {
-            return "O saldo atual da conta " + numConta + " é: R$" + conta.getSaldo().floatValue();
+            String mensagem = "O saldo atual da conta " + numConta + " é: R$" + conta.getSaldo().floatValue();
+            return Response.ok(mensagem).build();
         } else {
-            return "Conta não encontrada para o número: " + numConta;
+            return Response.status(Response.Status.NOT_FOUND).entity("Conta não encontrada para o número: " + numConta).build();
         }
     }
 
@@ -74,15 +77,22 @@ public class GreetingResource {
     @Path("/depositar")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
-    public String depositar(@FormParam("numConta") String numConta, @FormParam("valor") double valorDeposito) {
+    public Response depositar(@FormParam("numConta") String numConta, @FormParam("valor") double valorDeposito) {
         try {
             contaService.depositar(numConta, valorDeposito);
-            return "Depósito de R$ " + valorDeposito + " realizado na conta de número: " + numConta;
+            String mensagem = "Depósito de R$ " + valorDeposito + " realizado na conta de número: " + numConta;
+            return Response.ok(mensagem).build();
         } catch (ContaInvalidaException e) {
-            return "Erro ao depositar: " + e.getMessage();
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity("Erro ao depositar: " + e.getMessage())
+                    .build();
         } catch (Exception e) {
             e.printStackTrace();
-            return "Ocorreu um erro inesperado ao realizar o depósito.";
+            return Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Ocorreu um erro inesperado ao realizar o depósito.")
+                    .build();
         }
     }
 
@@ -90,17 +100,18 @@ public class GreetingResource {
     @Path("/sacar")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
-    public String sacar(@FormParam("numConta") String numConta, @FormParam("valor") double valorSaque) {
+    public Response sacar(@FormParam("numConta") String numConta, @FormParam("valor") double valorSaque) {
         try {
             contaService.sacar(numConta, valorSaque);
-            return "Saque de R$ " + valorSaque + " realizado na conta: " + numConta;
+            String mensagem = "Saque de R$ " + valorSaque + " realizado na conta: " + numConta;
+            return Response.ok(mensagem).build();
         } catch (ContaInvalidaException e) {
-            return "Erro ao sacar: " + e.getMessage();
+            return Response.status(Response.Status.BAD_REQUEST).entity("Erro ao sacar: " + e.getMessage()).build();
         } catch (SaldoInsuficienteException e) {
-            return "Saldo insuficiente para sacar R$ " + valorSaque + " na conta: " + numConta;
+            return Response.status(Response.Status.BAD_REQUEST).entity("Saldo insuficiente para sacar R$ " + valorSaque + " na conta: " + numConta).build();
         } catch (Exception e) {
             e.printStackTrace();
-            return "Ocorreu um erro inesperado ao realizar o saque.";
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Ocorreu um erro inesperado ao realizar o saque.").build();
         }
     }
 
@@ -108,20 +119,21 @@ public class GreetingResource {
     @Path("/transferir")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
-    public String transferir(@FormParam("contaOrigem") String contaOrigem,
-                             @FormParam("contaDestino") String contaDestino,
-                             @FormParam("valor") double valorTransferencia) {
+    public Response transferir(@FormParam("contaOrigem") String contaOrigem,
+                               @FormParam("contaDestino") String contaDestino,
+                               @FormParam("valor") double valorTransferencia) {
         try {
             contaService.transferir(contaOrigem, contaDestino, valorTransferencia);
-            return "Transferência de R$ " + valorTransferencia + " realizada com sucesso de " +
+            String mensagem = "Transferência de R$ " + valorTransferencia + " realizada com sucesso de " +
                     "Conta de origem: " + contaOrigem + " para Conta de destino: " + contaDestino;
+            return Response.ok(mensagem).build();
         } catch (ContaInvalidaException e) {
-            return "Erro ao transferir: " + e.getMessage();
+            return Response.status(Response.Status.BAD_REQUEST).entity("Erro ao transferir: " + e.getMessage()).build();
         } catch (SaldoInsuficienteException e) {
-            return "Saldo insuficiente para transferir R$ " + valorTransferencia + " da conta: " + contaOrigem;
+            return Response.status(Response.Status.BAD_REQUEST).entity("Saldo insuficiente para transferir R$ " + valorTransferencia + " da conta: " + contaOrigem).build();
         } catch (Exception e) {
             e.printStackTrace();
-            return "Ocorreu um erro inesperado na transação de transferência.";
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Ocorreu um erro inesperado na transação de transferência.").build();
         }
     }
 
