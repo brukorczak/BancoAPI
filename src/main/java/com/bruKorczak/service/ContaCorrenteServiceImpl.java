@@ -26,8 +26,8 @@ public class ContaCorrenteServiceImpl implements IContaCorrenteService {
             throw new ContaInvalidaException("Nome e CPF são obrigatórios");
         }
         String numConta = gerarNumContaUnico();
-        Cliente cliente = new Cliente(nome, cpf);
 
+        Cliente cliente = new Cliente(nome, cpf);
         ContaCorrente contaNova = new ContaCorrente(numConta, 0.0, cliente);
         contasCorrentes.add(contaNova);
 
@@ -52,6 +52,14 @@ public class ContaCorrenteServiceImpl implements IContaCorrenteService {
     public ContaCorrente getContaPorNumero(String numConta) {
         return contasCorrentes.stream()
                 .filter(conta -> conta.getNumConta().equals(numConta))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public ContaCorrente getContaPorId(Long id) {
+        return contasCorrentes.stream()
+                .filter(conta -> conta.getId().equals(id))
                 .findFirst()
                 .orElse(null);
     }
@@ -93,13 +101,12 @@ public class ContaCorrenteServiceImpl implements IContaCorrenteService {
     }
 
     @Override
-    public boolean excluirConta(String numConta) {
-        ContaCorrente conta = getContaPorNumero(numConta);
-
-        if (conta != null) {
-            return contasCorrentes.remove(conta);
-        } else {
-            return false;
+    public boolean excluirConta(Long id) {
+        for (ContaCorrente conta : contasCorrentes) {
+            if (conta.getId().equals(id)) {
+                return contasCorrentes.remove(conta);
+            }
         }
+        return false;
     }
 }

@@ -10,9 +10,11 @@ public interface IContaCorrenteService {
 
     ContaCorrente getContaPorNumero(String numConta);
 
+    ContaCorrente getContaPorId(Long id);
+
     boolean cpfExistente(String cpf);
 
-    boolean excluirConta(String numConta);
+    boolean excluirConta(Long id);
 
     List<ContaCorrente> listarContas();
 
