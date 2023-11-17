@@ -25,28 +25,28 @@ Depois de iniciar o servidor, você pode acessar os seguintes Endpoint:
 
 - Criar Conta:
 
-[/api/v1/contacorrente/criarconta](api/v1/contacorrente/criarconta): **POST**.
+(api/v1/contacorrente/criarconta): **POST**.
 
 - Contas
 
-[/api/v1/contacorrente](api/v1/contacorrente): **GET**.
+(api/v1/contacorrente): **GET**.
 
 - Ver Saldo:
 
-[localhost:8080/api/v1/contacorrente/saldo/{id}](localhost:8080/api/v1/contacorrente/saldo/{id}): **GET**.
+(localhost:8080/api/v1/contacorrente/saldo/{id}): **GET**.
 
 - Depositar:
 
-[localhost:8080/api/v1/contacorrente/depositar](localhost:8080/api/v1/contacorrente/depositar): **POST**.
+(localhost:8080/api/v1/contacorrente/depositar): **POST**.
 
 - Sacar:
 
-[/api/v1/contacorrente/sacar)] (api/v1/contacorrente/sacar): **POST**.
+ (api/v1/contacorrente/sacar): **POST**.
 
 - Transferir:
 
-[/api/v1/contacorrente/transferir](api/v1/contacorrente/transferir): **PATCH**.
+(api/v1/contacorrente/transferir): **PATCH**.
 
 - Deletar:
 
-[/api/v1/contacorrente/excluir/{id}](api/v1/contacorrente/excluir/{id}): **DELETE**.
+(api/v1/contacorrente/excluir/{id}): **DELETE**.
