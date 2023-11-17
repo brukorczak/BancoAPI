@@ -19,17 +19,17 @@ quarkus dev
 
 ## Endpoints
 
-Endpoint principal: /contacorrente
+Endpoint principal: localhost:8080/api/v1/contacorrente/
 
 Depois de iniciar o servidor, você pode acessar os seguintes Endpoint:
 
 - Criar Conta:
 
-[localhost:8080/contacorrente](localhost:8080/contacorrente): **POST**.
+[localhost:8080/api/v1/contacorrente/criarconta](localhost:8080/api/v1/contacorrente/criarconta): **POST**.
 
 - Contas
 
-[localhost:8080/contacorrente/contas](localhost:8080/contacorrente/contas): **GET**.
+[localhost:8080/api/v1/contacorrente](localhost:8080/api/v1/contacorrente): **GET**.
 
 - Ver Saldo:
 
@@ -37,16 +37,16 @@ Depois de iniciar o servidor, você pode acessar os seguintes Endpoint:
 
 - Depositar:
 
-[localhost:8080/contacorrente/depositar](localhost:8080/contacorrente/depositar): **POST**.
+[localhost:8080/api/v1/contacorrente/saldo/{id}](localhost:8080/api/v1/contacorrente/saldo/{id}): **POST**.
 
 - Sacar:
 
-[localhost:8080/contacorrente/sacar](localhost:8080/contacorrente/sacar): **POST**.
+[localhost:8080/api/v1/contacorrente/sacar) (localhost:8080/api/v1/contacorrente/sacar): **POST**.
 
 - Transferir:
 
-[localhost:8080/contacorrente/transferir](localhost:8080/contacorrente/transferir): **PATCH**.
+[localhost:8080/api/v1/contacorrente/transferir](localhost:8080/api/v1/contacorrente/transferir): **PATCH**.
 
 - Deletar:
 
-[localhost:8080/contacorrente/excluir/{numConta}](localhost:8080/contacorrente/depositar/excluir/{numConta}): **DELETE**.
+[localhost:8080/api/v1/contacorrente/excluir/{id}](localhost:8080/api/v1/contacorrente/excluir/{id}): **DELETE**.
