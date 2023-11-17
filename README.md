@@ -41,7 +41,7 @@ Depois de iniciar o servidor, você pode acessar os seguintes Endpoint:
 
 - Sacar:
 
-[/api/v1/contacorrente/sacar) (api/v1/contacorrente/sacar): **POST**.
+[/api/v1/contacorrente/sacar)] (api/v1/contacorrente/sacar): **POST**.
 
 - Transferir:
 
