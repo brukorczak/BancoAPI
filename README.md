@@ -33,11 +33,11 @@ Depois de iniciar o servidor, você pode acessar os seguintes Endpoint:
 
 - Ver Saldo:
 
-[/contacorrente/saldo/{numConta}](contacorrente/saldo/{numConta}): **GET**.
+[localhost:8080/api/v1/contacorrente/saldo/{id}](localhost:8080/api/v1/contacorrente/saldo/{id}): **GET**.
 
 - Depositar:
 
-[/api/v1/contacorrente/saldo/{id}](api/v1/contacorrente/saldo/{id}): **POST**.
+[localhost:8080/api/v1/contacorrente/depositar](localhost:8080/api/v1/contacorrente/depositar): **POST**.
 
 - Sacar:
 
